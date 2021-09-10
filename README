@@ -1,0 +1,79 @@
+
+#API Submission for AirVeda
+
+This is the Submission for Assignment Given by AirVeda
+
+Details:
+Name - Aayush Ashok
+University - Manipal University Jaipur
+Roll Number - 189302044
+email - aayush.189302044@muj.manipal.edu
+
+# Prompt - 
+
+## Full stack developer assignment
+Let's assume your company sells IOT devices which measure temperature and humidity
+data and send that data to the server every 10 seconds.
+
+Each device should have following properties
+• uid - unique id of the device
+• name - name of the device
+
+To store device readings, build two tables (TemperatureReading and HumidityReading).
+You can design these tables however you like.
+
+Your task is to create following APIs
+
+• API to create a device
+o Endpoint: POST /api/devices/
+o Content-Type: application/json
+o Request Payload
+▪ uid
+▪ name
+• API to delete a device
+o Endpoint: DELETE /api/devices/{device-uid}
+▪ device-uid - uid of the device you want to delete
+• API to retrieve a device
+o Endpoint: GET /api/devices/{device-uid}
+▪ device-uid - uid of the device you want to retrieve
+• API to list all devices
+o Endpoint: GET /api/devices/
+o Response format should be JSON
+• API to return readings for the given device in a given period.
+oEndpoint: GET /api/devices/{device
+uid}/readings/{parameter}/?start_on=yyyy-mm
+ddTHH:MM:SS&end_on=yyyy-mm-ddTHH:MM:SS
+▪ device-uid - uid of the device
+▪ parameter - temperature or humidity
+▪ start_on and end_on are query parameters which are compulsory
+and should be used to filter the result to only include data between
+start_on and end_on.
+▪ yyyy-mm-ddTHH:MM:SS - year-month
+-dateThour:minute:second
+o Response format should be JSON
+● Create UI to plot temperature and humidity vs time for
+given device.
+o Endpoint: GET /devices-graph/
+o Device Uid: Device uid will be present in request query
+params.
+o Should return an html page with the graph.
+Use Django templates and Django Rest Framework to build the following and upload the
+repo on github.
+
+
+# Instructions on how to use APIs
+APIs were created on pure django rest framework. for proper operation, the necessary packages need to be installed.
+ *I have attempted to automate the installation process, by modifying the init.py script, but it might not work on operating systems other than Windows 10*
+
+*Step 1- Download the folders "api" and "whole project" and put them in a single folder
+*Step 2- create a superuser to add values into the database using python manage.py createsuperuser
+*Step 3 - Run server using python manage.py runserver
+
+
+* To List All Devices - http://localhost:8000/api/devices/ 
+* To Enter a new device - http://localhost:8000/api/devices/  - and input the device details in JSON format and send POST request. Only 1 input is accepted at a time
+* To Delete a device - http://localhost:8000/api/devices/{device uid} - enter the integer uid, and send DELETE request
+* To Retrieve a device - http://localhost:8000/api/devices/{device uid} - enter the integer uid
+* To Retrieve All information about particular parameter of particular device in particular datetime range - 
+  http://localhost:8000/api/devices/{device uid}/readings/{parameter}/?start_on=yyyy-mm-ddTHH:MM:SS&end_on=yyyy-mm-ddTHH:MM:SS
+* To Show Graph - http://localhost:8000/api/devices-graph/ - Pass UID as request query parameter
