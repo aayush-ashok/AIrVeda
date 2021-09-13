@@ -9,13 +9,15 @@ from .serializers import *
 from .models import *
 from datetime import datetime as dt
 import pandas as pd
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import numpy as np
 import seaborn as sns
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from django.http import HttpResponse
-
-
+import os
+import io,base64
 # Create your views here.
 @api_view(['GET','DELETE'])
 def DeleteOrRetrive(request,uid):
@@ -49,10 +51,13 @@ def Visualization(request):
     plt.xlabel('Date Time')
     plt.ylabel('Value')
     plt.legend()
-    fig.savefig('my_plot.png')
-    
-    return FileResponse(open('my_plot.png','rb'))
-
+    flike = io.BytesIO()
+    fig.savefig(flike)
+    b64 = base64.b64encode(flike.getvalue()).decode()
+    context={}
+    context['chart'] = b64
+    # return FileResponse(open('my_plot.png','rb'))
+    return render(request,'api/viz.html',context)
 
 
 
